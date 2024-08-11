@@ -1,15 +1,15 @@
-import { View, StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 
-import { Tabs } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
 
-import {
-  useFonts,
-  Inter_500Medium,
-  Inter_400Regular,
-  Inter_600SemiBold,
-} from '@expo-google-fonts/inter';
 import Loading from '@/components/Loading';
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  useFonts,
+} from '@expo-google-fonts/inter';
 
 export default function TabLayout() {
 
@@ -30,7 +30,7 @@ export default function TabLayout() {
         backgroundColor="transparent"
         translucent
       />
-      <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false, tabBarShowLabel: false }}>
+      <Tabs screenOptions={{ tabBarActiveTintColor: '#1A1A1A', headerShown: false, tabBarShowLabel: false }}>
         <Tabs.Screen
           name="index"
           options={{

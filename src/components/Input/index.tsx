@@ -13,7 +13,7 @@ const Input: React.FC<InputPros> = ({ label, isPassword = false, type = "default
   return (
     <Styled.InputContainer>
       <Styled.Label>
-        {label}
+        {label}:
       </Styled.Label>
       <Styled.Input
         keyboardType={type}
