@@ -1,9 +1,10 @@
-import { Text } from "react-native";
+import HomeHeader from '@/components/HomeHeader';
+import * as Styled from '../styles/home';
 
 export default function Index() {
   return (
-    <Text>
-      Home
-    </Text>
+    <Styled.Container>
+      <HomeHeader />
+    </Styled.Container>
   );
 }

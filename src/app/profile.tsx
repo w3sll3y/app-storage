@@ -1,6 +1,5 @@
-import LoginPage from "@/pages/login";
-import ProfilePage from "@/pages/profile";
 import { useState } from "react";
+import LoginPage from "./login";
 
 export default function Profile() {
   const [user, setUser] = useState(false);
@@ -9,7 +8,8 @@ export default function Profile() {
     <>
       {
         user ? (
-          <ProfilePage />
+          null
+          // <ProfilePage />
         ) : <LoginPage />
       }
     </>

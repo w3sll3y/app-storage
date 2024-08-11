@@ -1,19 +1,21 @@
-import Header from '@/components/Header';
-import * as Styled from './styles';
-import Input from '@/components/Input';
 import Button from '@/components/Button';
+import Header from '@/components/Header';
+import Input from '@/components/Input';
+import * as Styled from '../styles/login';
+import { router } from 'expo-router';
 
-export default function SignUp() {
+export default function LoginPage() {
+
+  function handleGoSignUp() {
+    router.navigate('/signup');
+  }
+
   return (
     <Styled.Container>
       <Header
-        title='Cadastre-se'
+        title='Login'
       />
       <Styled.ContainerInput>
-        <Input
-          label='Nome'
-          type='default'
-        />
         <Input
           label='Email'
           type='email-address'
@@ -25,11 +27,12 @@ export default function SignUp() {
         />
         <Button
           type='primary'
-          title="Cadastrar"
+          title="Fazer Login"
         />
         <Button
           type='secondary'
-          title="Voltar ao Login"
+          title="Criar uma conta"
+          onPress={handleGoSignUp}
         />
       </Styled.ContainerInput>
     </Styled.Container>

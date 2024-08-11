@@ -30,7 +30,9 @@ export default function TabLayout() {
         backgroundColor="transparent"
         translucent
       />
-      <Tabs screenOptions={{ tabBarActiveTintColor: '#1A1A1A', headerShown: false, tabBarShowLabel: false }}>
+      <Tabs
+        screenOptions={{ tabBarActiveTintColor: '#1A1A1A', headerShown: false, tabBarShowLabel: false }}
+      >
         <Tabs.Screen
           name="index"
           options={{
@@ -46,6 +48,20 @@ export default function TabLayout() {
         <Tabs.Screen
           name="profile"
           options={{
+            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="login"
+          options={{
+            href: null,
+            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="signup"
+          options={{
+            href: null,
             tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
           }}
         />
