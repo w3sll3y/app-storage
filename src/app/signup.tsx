@@ -3,11 +3,22 @@ import * as Styled from '../styles/signup';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { router } from 'expo-router';
+import { UserServer } from '@/server/user-server';
+import { useState } from 'react';
 
 export default function SignUp() {
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   function handleGoLogin() {
     router.navigate('/login');
+  }
+
+  async function handleDoSignUp() {
+    const data = await UserServer.handleSingUp({ name, email, password });
+    console.log('user===', data)
   }
 
   return (
@@ -19,19 +30,28 @@ export default function SignUp() {
         <Input
           label='Nome'
           type='default'
+          value={name}
+          onChangeText={newName => setName(newName)}
         />
         <Input
           label='Email'
+          autoCapitalize='none'
           type='email-address'
+          value={email}
+          onChangeText={newEmail => setEmail(newEmail)}
         />
         <Input
           label='Senha'
           type='default'
+          autoCapitalize='none'
           isPassword
+          value={password}
+          onChangeText={newPassword => setPassword(newPassword)}
         />
         <Button
           type='primary'
           title="Cadastrar"
+          onPress={handleDoSignUp}
         />
         <Button
           type='secondary'

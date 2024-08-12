@@ -16,7 +16,6 @@ export const ContainerBody = styled.SafeAreaView`
 `;
 
 export const Title = styled.Text`
-  font-family: 'Inter_900Black';
 `;
 
 export const ContainerInput = styled.View`
