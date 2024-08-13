@@ -5,6 +5,7 @@ import * as Styled from '../styles/login';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { UserServer } from '@/server/user-server';
+import { userStorage } from '@/storage/user';
 
 export default function LoginPage() {
 
@@ -16,8 +17,11 @@ export default function LoginPage() {
   }
 
   async function handleDoLogin() {
-    const token = await UserServer.handleLogin({ email, password });
-    console.log('token', token)
+    const access_token = await UserServer.handleLogin({ email, password });
+    if (access_token) {
+      await userStorage.save(String(access_token));
+      router.navigate('/');
+    }
   }
 
   return (

@@ -1,9 +1,27 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
+  position: relative;
   flex: 1;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 `;
 
-export const Title = styled.Text``;
+export const ContainerTitle = styled.View``;
+
+export const ContainerBody = styled.SafeAreaView`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Title = styled.Text`
+`;
+
+export const ContainerInput = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #F5F5F5;
+`;

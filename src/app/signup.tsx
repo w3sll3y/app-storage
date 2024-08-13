@@ -18,7 +18,9 @@ export default function SignUp() {
 
   async function handleDoSignUp() {
     const data = await UserServer.handleSingUp({ name, email, password });
-    console.log('user===', data)
+    if (data.id) {
+      router.navigate('/login');
+    }
   }
 
   return (
