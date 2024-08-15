@@ -1,8 +1,7 @@
+import Octicons from '@expo/vector-icons/Octicons';
 import { userStorage } from "@/storage/user";
 import { useCallback, useState } from "react";
 import LoginPage from "./login";
-
-import Button from "@/components/Button";
 import Header from "@/components/Header";
 import * as Styled from '@/styles/profile';
 import { router, useFocusEffect } from "expo-router";
@@ -40,18 +39,41 @@ export default function Profile() {
           <Styled.Container>
             <Header
               title="Meu perfil"
-              hasBack
             />
             <Styled.ContainerBody>
-              <Styled.Title>
-                Perfil
-              </Styled.Title>
-              <Button
-                title="logout"
-                type="tertiary"
-                onPress={handleLogout}
-              />
+              <Styled.ContainerButtons>
+                <Styled.Button>
+                  <Styled.Title>
+                    Editar Perfil
+                  </Styled.Title>
+                </Styled.Button>
+                <Styled.Button>
+                  <Styled.Title>
+                    Histórico de compras
+                  </Styled.Title>
+                </Styled.Button>
+                <Styled.Button>
+                  <Styled.Title>
+                    Carteira
+                  </Styled.Title>
+                </Styled.Button>
+                <Styled.Button>
+                  <Styled.Title>
+                    Endereços
+                  </Styled.Title>
+                </Styled.Button>
+              </Styled.ContainerButtons>
             </Styled.ContainerBody>
+            <Styled.LoggoutButton
+              onPress={handleLogout}
+            >
+              <Styled.LoggoutText>
+                Logout
+              </Styled.LoggoutText>
+              <Styled.LoggoutIcon>
+                <Octicons name="sign-out" size={24} color="black" />
+              </Styled.LoggoutIcon>
+            </Styled.LoggoutButton>
           </Styled.Container>
       }
     </>
