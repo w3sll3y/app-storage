@@ -72,6 +72,13 @@ export default function TabLayout() {
             tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
           }}
         />
+        <Tabs.Screen
+          name="history"
+          options={{
+            href: null,
+            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+          }}
+        />
       </Tabs>
     </View>
   );

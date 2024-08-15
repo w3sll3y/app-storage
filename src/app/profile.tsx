@@ -18,6 +18,10 @@ export default function Profile() {
     }
   }
 
+  async function handleGoHistory() {
+    router.navigate('/history')
+  }
+
   async function handleLogout() {
     await userStorage.remove();
     setUser(false)
@@ -47,7 +51,9 @@ export default function Profile() {
                     Editar Perfil
                   </Styled.Title>
                 </Styled.Button>
-                <Styled.Button>
+                <Styled.Button
+                  onPress={handleGoHistory}
+                >
                   <Styled.Title>
                     Histórico de compras
                   </Styled.Title>
