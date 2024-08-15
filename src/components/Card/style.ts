@@ -25,7 +25,7 @@ export const NameContainer = styled.View`
   height: 100px;
   width: 100%;
   justify-content: center;
-  padding-left: 10%;
+  padding-left: 5%;
 `;
 
 export const NameInput = styled.TextInput`
@@ -72,7 +72,7 @@ export const CardData = styled.TextInput`
 
 export const SectionCode = styled.View`
   flex-direction: column;
-  margin-top: -10px;
+  margin-top: -12px;
   align-items: start;
   flex: 1;
   padding-left: 20px;

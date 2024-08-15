@@ -1,3 +1,4 @@
+import { userStorage } from "@/storage/user";
 import { api } from "./api";
 
 type LoginProps = {
@@ -20,6 +21,22 @@ export type User = {
   email: string;
   name: string;
 }
+
+type PurchaseProps = {
+  items: ItemSell[];
+  number: string;
+  name: string;
+  dueDate: string;
+  code: string;
+  total: number;
+};
+
+type ItemSell = {
+  price: number;
+  seller: string;
+  thumbnailHd: string;
+  title: string;
+};
 
 async function handleLogin({ email, password }: LoginProps) {
   try {
@@ -56,4 +73,31 @@ async function handleGetUserData() {
   }
 }
 
-export const UserServer = { handleLogin, handleGetUserData, handleSingUp } 
+async function handlePurchase({ items, code, dueDate, name, number, total }: PurchaseProps) {
+  const token = await userStorage.get();
+  try {
+    const { data } = await api.post(
+      "/purchases",
+      {
+        items,
+        code,
+        dueDate,
+        name,
+        number,
+        total
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return data;
+
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const UserServer = { handleLogin, handleGetUserData, handleSingUp, handlePurchase } 
