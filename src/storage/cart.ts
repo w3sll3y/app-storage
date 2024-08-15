@@ -29,7 +29,6 @@ async function save(newItem: ItemProp, quantity: number) {
 async function get() {
   try {
     const cartItem = await AsyncStorage.getItem(STORAGE_CART);
-    console.log('ffffff', cartItem);
     return cartItem ? JSON.parse(cartItem) : null;
   } catch (error) {
     throw error;

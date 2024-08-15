@@ -94,8 +94,7 @@ export default function Checkout() {
       items.push(newItem);
     })
     const purchase = await UserServer.handlePurchase({ items, ...card, total });
-    console.log('puppp', purchase)
-    return console.log('card', card)
+    return purchase;
   }
 
   useFocusEffect(
