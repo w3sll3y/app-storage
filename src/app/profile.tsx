@@ -1,5 +1,5 @@
 import { userStorage } from "@/storage/user";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import LoginPage from "./login";
 
 import Button from "@/components/Button";

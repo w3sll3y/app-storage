@@ -1,11 +1,16 @@
 import { formatPrice } from '@/utils/formatPrice';
 import { useState } from 'react';
-import { Button, FlatList, Text, View } from 'react-native';
-import * as Styled from './styles';
+import { FlatList } from 'react-native';
 import Modal from "react-native-modal";
 import ItemModal from '../ItemModal';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+
+import * as Styled from './styles';
+import { cartStorage } from '@/storage/cart';
 
 type ItemProp = {
+  id?: number;
+  quantity?: number;
   date: string;
   price: number;
   seller: string;
@@ -23,17 +28,19 @@ export function FlatListItems({ items }: ItemsListProps) {
   const [isModalFull, setIsModalFull] = useState(false);
   const [data, setData] = useState<ItemProp>();
 
-  function onCloseModal() {
-    setModalVisible(false)
-  }
-
   function onOpenModal(item: ItemProp, isFull: boolean) {
     setData(item);
     setIsModalFull(isFull);
     setModalVisible(true)
   }
+
   function truncateTitle(title: string, maxLength: number) {
     return title.length > maxLength ? `${title.substring(0, maxLength)}...` : title;
+  }
+
+  async function handleAddItem(item: ItemProp) {
+    await cartStorage.save(item, 1)
+    // await cartStorage.remove()
   }
 
   return (
@@ -63,6 +70,9 @@ export function FlatListItems({ items }: ItemsListProps) {
                       <Styled.Title>{truncateTitle(item.title, 15)}</Styled.Title>
                       <Styled.Price>{formatPrice(item.price)}</Styled.Price>
                     </Styled.TitleContainer>
+                    <Styled.AddItemButton onPress={() => handleAddItem(item)}>
+                      <FontAwesome5 name="plus" size={12} color="white" />
+                    </Styled.AddItemButton>
                   </Styled.ItemRowContainer>
                   {items[index + 1] && (
                     <Styled.ItemRowContainer
@@ -79,6 +89,9 @@ export function FlatListItems({ items }: ItemsListProps) {
                         <Styled.Title>{truncateTitle(items[index + 1].title, 15)}</Styled.Title>
                         <Styled.Price>{formatPrice(items[index + 1].price)}</Styled.Price>
                       </Styled.TitleContainer>
+                      <Styled.AddItemButton onPress={() => handleAddItem(items[index + 1])}>
+                        <FontAwesome5 name="plus" size={12} color="white" />
+                      </Styled.AddItemButton>
                     </Styled.ItemRowContainer>
                   )}
                 </Styled.RowContainer>
@@ -98,6 +111,9 @@ export function FlatListItems({ items }: ItemsListProps) {
                       <Styled.Title>{truncateTitle(item.title, 15)}</Styled.Title>
                       <Styled.Price>{formatPrice(item.price)}</Styled.Price>
                     </Styled.TitleContainer>
+                    <Styled.AddItemButton onPress={() => handleAddItem(item)}>
+                      <FontAwesome5 name="plus" size={12} color="white" />
+                    </Styled.AddItemButton>
                   </Styled.ItemColContainer>
                 </Styled.ColContainer>
               ) : null}

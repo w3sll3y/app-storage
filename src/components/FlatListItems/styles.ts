@@ -25,6 +25,7 @@ export const RowContainer = styled.View`
 `;
 
 export const ItemRowContainer = styled.TouchableOpacity`
+  position: relative;
   background-color: white;
   border-radius: 15px;
   min-height: 210px;
@@ -88,4 +89,18 @@ export const StyledColImage = styled.Image`
   height: 130px;
   border-radius: 10px;
   object-fit: cover;
+`;
+
+export const AddItemButton = styled.TouchableOpacity`
+  position: absolute;
+  z-index: 1000;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+
+  bottom: 15px;
+  right: 15px;
 `;

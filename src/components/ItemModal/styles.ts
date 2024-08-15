@@ -6,7 +6,7 @@ export const Modal = styled.View`
   align-items: center;
   margin-top: 22px;
   background-color: white;
-  height: 220px;
+  height: 230px;
   border-radius: 10px;
 `;
 
@@ -74,9 +74,15 @@ export const Section = styled.View`
   flex: 1;
 `;
 
+export const SectionPrice = styled.View`
+  flex: 1;
+  align-items: flex-end;
+`;
+
+
 export const Text = styled.Text`
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 12px;
 `;
 
 export const Price = styled.Text`
@@ -84,4 +90,25 @@ export const Price = styled.Text`
   color: red;
   font-weight: 700;
   font-size: 14px;
+`;
+
+export const Quantity = styled.Text`
+  font-size: 12px;
+  font-weight: 500;
+`;
+
+export const Button = styled.TouchableOpacity`
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #000;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextButton = styled.Text`
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
 `;

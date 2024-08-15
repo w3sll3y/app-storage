@@ -8,7 +8,7 @@ export const Container = styled.View`
 
 export const Button = styled.TouchableOpacity<{ type: 'primary' | 'secondary' | 'tertiary' }>`
   padding: 15px 25px;
-  border-radius: 5px;
+  border-radius: 10px;
   align-items: center;
   justify-content: center;
   
