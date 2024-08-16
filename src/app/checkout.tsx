@@ -8,7 +8,7 @@ import * as Styled from '@/styles/checkout';
 import { formatPrice } from '@/utils/formatPrice';
 import { FontAwesome6 } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 
@@ -29,14 +29,6 @@ type CardProp = {
   dueDate: string;
   code: string;
 };
-
-type PurchaseProp = {
-  items: ItemSell[];
-  number: string;
-  name: string;
-  dueDate: string;
-  code: string;
-}
 
 type ItemSell = {
   price: number;
@@ -94,6 +86,11 @@ export default function Checkout() {
       items.push(newItem);
     })
     const purchase = await UserServer.handlePurchase({ items, ...card, total });
+    if (purchase.id) {
+      cartStorage.clear();
+      router.navigate('/');
+      return purchase;
+    }
     return purchase;
   }
 

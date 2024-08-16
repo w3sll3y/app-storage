@@ -68,4 +68,13 @@ async function remove(id: number) {
   }
 }
 
-export const cartStorage = { save, get, update, remove };
+async function clear() {
+  try {
+    await AsyncStorage.removeItem(STORAGE_CART);
+    cartEmitter.emit('cartUpdated', []);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const cartStorage = { save, get, update, remove, clear };
