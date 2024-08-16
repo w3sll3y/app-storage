@@ -7,13 +7,13 @@ import { useState } from 'react';
 import Button from '../Button';
 
 type ItemModalProps = {
-  date: string;
-  price: number;
-  seller: string;
-  thumbnailHd: string;
-  title: string;
-  zipcode: string;
-  isModalFull: boolean;
+  date?: string;
+  price?: number;
+  seller?: string;
+  thumbnailHd?: string;
+  title?: string;
+  zipcode?: string;
+  isModalFull?: boolean;
 }
 
 const ItemModal: React.FC<ItemModalProps> = ({
@@ -40,13 +40,13 @@ const ItemModal: React.FC<ItemModalProps> = ({
 
   async function handleSetItem() {
     const item = {
-      date,
-      price,
-      seller,
-      thumbnailHd,
-      title,
-      zipcode,
-      isModalFull,
+      date: date ?? '',
+      price: price ?? 0,
+      seller: seller ?? '',
+      thumbnailHd: thumbnailHd ?? '',
+      title: title ?? '',
+      zipcode: zipcode ?? '',
+      isModalFull: isModalFull ?? false,
     }
 
     cartStorage.save(item, quantity);

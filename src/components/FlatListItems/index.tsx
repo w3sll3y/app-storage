@@ -21,17 +21,22 @@ type ItemProp = {
 
 type ItemsListProps = {
   items: ItemProp[];
+  search?: string;
 };
 
-export function FlatListItems({ items }: ItemsListProps) {
+export function FlatListItems({ items, search = "" }: ItemsListProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [isModalFull, setIsModalFull] = useState(false);
   const [data, setData] = useState<ItemProp>();
 
+  const filteredItems = items.filter(item =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
+
   function onOpenModal(item: ItemProp, isFull: boolean) {
     setData(item);
     setIsModalFull(isFull);
-    setModalVisible(true)
+    setModalVisible(true);
   }
 
   function truncateTitle(title: string, maxLength: number) {
@@ -39,14 +44,13 @@ export function FlatListItems({ items }: ItemsListProps) {
   }
 
   async function handleAddItem(item: ItemProp) {
-    await cartStorage.save(item, 1)
-    // await cartStorage.remove()
+    await cartStorage.save(item, 1);
   }
 
   return (
     <>
       <FlatList
-        data={items}
+        data={filteredItems}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }: { item: ItemProp; index: number }) => {
           const isFirstOrThirdInGroup = index % 3 === 0;
@@ -74,22 +78,22 @@ export function FlatListItems({ items }: ItemsListProps) {
                       <FontAwesome5 name="plus" size={12} color="white" />
                     </Styled.AddItemButton>
                   </Styled.ItemRowContainer>
-                  {items[index + 1] && (
+                  {filteredItems[index + 1] && (
                     <Styled.ItemRowContainer
-                      onPress={() => onOpenModal(items[index + 1], false)}
+                      onPress={() => onOpenModal(filteredItems[index + 1], false)}
                     >
                       <Styled.ContainerStyledRowImage>
                         <Styled.StyledRowImage
                           source={{
-                            uri: items[index + 1].thumbnailHd
+                            uri: filteredItems[index + 1].thumbnailHd
                           }}
                         />
                       </Styled.ContainerStyledRowImage>
                       <Styled.TitleContainer>
-                        <Styled.Title>{truncateTitle(items[index + 1].title, 15)}</Styled.Title>
-                        <Styled.Price>{formatPrice(items[index + 1].price)}</Styled.Price>
+                        <Styled.Title>{truncateTitle(filteredItems[index + 1].title, 15)}</Styled.Title>
+                        <Styled.Price>{formatPrice(filteredItems[index + 1].price)}</Styled.Price>
                       </Styled.TitleContainer>
-                      <Styled.AddItemButton onPress={() => handleAddItem(items[index + 1])}>
+                      <Styled.AddItemButton onPress={() => handleAddItem(filteredItems[index + 1])}>
                         <FontAwesome5 name="plus" size={12} color="white" />
                       </Styled.AddItemButton>
                     </Styled.ItemRowContainer>
@@ -136,3 +140,4 @@ export function FlatListItems({ items }: ItemsListProps) {
     </>
   );
 }
+

@@ -15,10 +15,15 @@ type ItemProp = {
 
 export default function Index() {
   const [items, setItems] = useState<ItemProp[]>();
+  const [search, setSearch] = useState('');
 
   async function getItems() {
     const data = await ItemsServer.handleGetItemsData();
     setItems(data);
+  }
+
+  async function handleSearch(value: string) {
+    setSearch(value);
   }
 
   useEffect(() => {
@@ -27,8 +32,11 @@ export default function Index() {
 
   return (
     <Styled.Container>
-      <HomeHeader />
-      {items && <FlatListItems items={items} />}
+      <HomeHeader
+        search={search}
+        handleSearch={handleSearch}
+      />
+      {items && <FlatListItems search={search} items={items} />}
     </Styled.Container>
   );
 }

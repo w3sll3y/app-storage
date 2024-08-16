@@ -19,13 +19,11 @@ export const Title = styled.Text`
 `;
 
 export const ContainerButtons = styled.View`
-  height: 250px;
   width: 90%;
   background-color: white;
   border-radius: 10px;
 
-  margin: 0 0 25px 0;
-  padding: 25px;
+  padding: 25px 25px 0;
 
   ${Platform.select({
   ios: `

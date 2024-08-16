@@ -1,7 +1,12 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import * as Styled from './styles';
 
-const HomeHeader: React.FC = () => {
+type HomeProps = {
+  search: string;
+  handleSearch: (value: string) => void;
+}
+
+const HomeHeader: React.FC<HomeProps> = ({ search, handleSearch }) => {
   return (
     <Styled.Header>
       <Styled.Title>
@@ -13,6 +18,8 @@ const HomeHeader: React.FC = () => {
         />
         <Styled.Input
           placeholder='O que você procura?'
+          value={search}
+          onChangeText={newSearch => handleSearch(newSearch)}
         >
         </Styled.Input>
       </Styled.InputContainer>
