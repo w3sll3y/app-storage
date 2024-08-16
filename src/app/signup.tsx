@@ -18,12 +18,14 @@ export default function SignUp() {
   }
 
   async function handleDoSignUp() {
+    if (name === "" || email === "" || password === "") {
+      return ToastMessage.errorToast(
+        'Algo deu errado.😔',
+        `Preencha todos os campos`
+      )
+    }
     const data = await UserServer.handleSingUp({ name, email, password });
     if (data.id) {
-      ToastMessage.successToast(
-        'Bem-Vindo!',
-        'Cadastro feito com sucesso!'
-      )
       setName('');
       setEmail('');
       setPassword('');

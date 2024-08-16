@@ -1,5 +1,6 @@
 import { userStorage } from "@/storage/user";
 import { api } from "./api";
+import { ToastMessage } from "@/utils/toastMessages";
 
 type LoginProps = {
   email: string;
@@ -46,7 +47,10 @@ async function handleLogin({ email, password }: LoginProps) {
     });
     return data.access_token;
   } catch (error) {
-    throw error
+    ToastMessage.errorToast(
+      'Tente novamente!',
+      'Email ou senha incorretos.'
+    )
   }
 }
 
@@ -57,9 +61,18 @@ async function handleSingUp({ name, email, password }: SignUpProps) {
       email,
       password
     });
+    ToastMessage.successToast(
+      'Bem-Vindo!🎉',
+      'Cadastro feito com sucesso!'
+    )
     return data;
-  } catch (error) {
-    throw error
+  } catch (error: any) {
+    if (error?.response?.status) {
+      ToastMessage.errorToast(
+        'Tente novamente!',
+        `Email já cadastrado.`
+      )
+    }
   }
 }
 
@@ -96,7 +109,10 @@ async function handlePurchase({ items, code, dueDate, name, number, total }: Pur
     return data;
 
   } catch (error) {
-    throw error;
+    return ToastMessage.errorToast(
+      'Algo deu errado.😔',
+      'Tente novamente'
+    )
   }
 }
 

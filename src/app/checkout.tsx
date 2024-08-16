@@ -12,6 +12,7 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { ItemProp } from "@/types/item";
+import { ToastMessage } from '@/utils/toastMessages';
 
 type CardProp = {
   number: string;
@@ -79,10 +80,21 @@ export default function Checkout() {
       }
     });
 
+    if (name === "" || code === "" || dueDate === "" || number.length < 12) {
+      return ToastMessage.errorToast(
+        'Algo deu errado.😔',
+        `Preencha todos os campos do cartão`
+      )
+    }
+
     const purchase = await UserServer.handlePurchase({ items, ...card, total });
     if (purchase.id) {
       cartStorage.clear();
       router.navigate(`/order/${purchase.id}`);
+      ToastMessage.successToast(
+        'Pedido efetuado com sucesso!🎉',
+        'Veja os detalhes'
+      )
       return purchase;
     }
     return purchase;

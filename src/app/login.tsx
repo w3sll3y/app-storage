@@ -6,6 +6,7 @@ import { userStorage } from '@/storage/user';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import * as Styled from '../styles/login';
+import { ToastMessage } from '@/utils/toastMessages';
 
 export default function LoginPage() {
 
@@ -24,6 +25,7 @@ export default function LoginPage() {
       setEmail('');
       setPassword('');
     }
+    return
   }
 
   return (
