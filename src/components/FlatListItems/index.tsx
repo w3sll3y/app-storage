@@ -47,6 +47,10 @@ export function FlatListItems({ items, search = "" }: ItemsListProps) {
     await cartStorage.save(item, 1);
   }
 
+  async function handleCloseModal(value: boolean) {
+    setModalVisible(value)
+  }
+
   return (
     <>
       <FlatList
@@ -135,6 +139,7 @@ export function FlatListItems({ items, search = "" }: ItemsListProps) {
           thumbnailHd={data?.thumbnailHd}
           title={data?.title}
           isModalFull={isModalFull}
+          handleCloseModal={handleCloseModal}
         />
       </Modal>
     </>

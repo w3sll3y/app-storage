@@ -14,6 +14,7 @@ type ItemModalProps = {
   title?: string;
   zipcode?: string;
   isModalFull?: boolean;
+  handleCloseModal: (value: boolean) => void;
 }
 
 const ItemModal: React.FC<ItemModalProps> = ({
@@ -23,7 +24,8 @@ const ItemModal: React.FC<ItemModalProps> = ({
   thumbnailHd,
   title,
   zipcode,
-  isModalFull
+  isModalFull,
+  handleCloseModal
 }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -50,6 +52,7 @@ const ItemModal: React.FC<ItemModalProps> = ({
     }
 
     cartStorage.save(item, quantity);
+    handleCloseModal(false)
   }
 
   return (

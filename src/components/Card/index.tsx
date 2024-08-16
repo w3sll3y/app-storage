@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({
 
   const updateNumber = (part: string, setPart: React.Dispatch<React.SetStateAction<string>>) => (value: string) => {
     setPart(value);
-    handleNumber(`${firstPart}${secondPart}${thirdPart}${fourthPart}`); // Atualiza a string concatenada
+    handleNumber(`${firstPart}${secondPart}${thirdPart}${fourthPart}`);
   };
 
   return (

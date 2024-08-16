@@ -1,10 +1,10 @@
-import { StatusBar, Text, View } from 'react-native';
+import Loading from '@/components/Loading';
+import { cartEmitter, cartStorage } from '@/storage/cart';
+import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold, useFonts } from '@expo-google-fonts/inter';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { Tabs, useFocusEffect } from 'expo-router';
-import Loading from '@/components/Loading';
-import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold, useFonts } from '@expo-google-fonts/inter';
 import { useCallback, useState } from 'react';
-import { cartStorage } from '@/storage/cart';
+import { StatusBar, Text, View } from 'react-native';
 
 type ItemProp = {
   id?: number;
@@ -36,6 +36,16 @@ export default function TabLayout() {
       }
 
       fetchItems();
+
+      const onCartUpdated = () => {
+        fetchItems();
+      };
+
+      cartEmitter.on('cartUpdated', onCartUpdated);
+
+      return () => {
+        cartEmitter.off('cartUpdated', onCartUpdated);
+      };
     }, [])
   );
 
@@ -76,15 +86,15 @@ export default function TabLayout() {
                       position: 'absolute',
                       right: -10,
                       top: -5,
-                      backgroundColor: 'red',
+                      backgroundColor: '#D9D9D9',
                       borderRadius: 10,
-                      width: 20,
-                      height: 20,
+                      width: 15,
+                      height: 15,
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
                   >
-                    <Text style={{ color: 'white', fontSize: 12 }}>{totalQuantity}</Text>
+                    <Text style={{ color: '#000', fontSize: 8, fontWeight: 900 }}>{totalQuantity}</Text>
                   </View>
                 )}
               </View>
