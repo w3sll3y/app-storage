@@ -4,20 +4,9 @@ import { FlatList } from 'react-native';
 import Modal from "react-native-modal";
 import ItemModal from '../ItemModal';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-
+import { ItemProp } from '@/types/item';
 import * as Styled from './styles';
 import { cartStorage } from '@/storage/cart';
-
-type ItemProp = {
-  id?: number;
-  quantity?: number;
-  date: string;
-  price: number;
-  seller: string;
-  thumbnailHd: string;
-  title: string;
-  zipcode: string;
-};
 
 type ItemsListProps = {
   items: ItemProp[];

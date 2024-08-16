@@ -3,7 +3,6 @@ import { useNavigation } from 'expo-router';
 
 import * as Styled from './styles';
 
-
 type TitleProps = {
   hasBack?: boolean;
   title: string;

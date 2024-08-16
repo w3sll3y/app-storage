@@ -8,17 +8,7 @@ import { formatPrice } from "@/utils/formatPrice";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Button from "@/components/Button";
 import { userStorage } from "@/storage/user";
-
-type ItemProp = {
-  id: number;
-  date: string;
-  price: number;
-  seller: string;
-  thumbnailHd: string;
-  title: string;
-  zipcode: string;
-  quantity: number;
-};
+import { ItemProp } from "@/types/item";
 
 export default function Cart() {
   const [user, setUser] = useState(false);

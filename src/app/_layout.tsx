@@ -5,17 +5,7 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { Tabs, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { StatusBar, Text, View } from 'react-native';
-
-type ItemProp = {
-  id?: number;
-  date: string;
-  price: number;
-  seller: string;
-  quantity?: number;
-  thumbnailHd: string;
-  title: string;
-  zipcode: string;
-};
+import { ItemProp } from '@/types/item';
 
 export default function TabLayout() {
   const [items, setItems] = useState<ItemProp[]>([]);

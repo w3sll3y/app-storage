@@ -1,10 +1,9 @@
 
-import { formatPrice } from '@/utils/formatPrice';
-import * as Styled from './styles';
-import { FontAwesome6 } from '@expo/vector-icons';
 import { cartStorage } from '@/storage/cart';
+import { formatPrice } from '@/utils/formatPrice';
+import { FontAwesome6 } from '@expo/vector-icons';
 import { useState } from 'react';
-import Button from '../Button';
+import * as Styled from './styles';
 
 type ItemModalProps = {
   date?: string;

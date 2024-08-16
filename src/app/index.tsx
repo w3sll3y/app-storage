@@ -3,15 +3,7 @@ import { ItemsServer } from '@/server/items-server';
 import { useEffect, useState } from 'react';
 import * as Styled from '../styles/home';
 import { FlatListItems } from '@/components/FlatListItems';
-
-type ItemProp = {
-  date: string;
-  price: number;
-  seller: string;
-  thumbnailHd: string;
-  title: string;
-  zipcode: string;
-};
+import { ItemProp } from "@/types/item";
 
 export default function Index() {
   const [items, setItems] = useState<ItemProp[]>();

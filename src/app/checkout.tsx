@@ -11,17 +11,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
-
-type ItemProp = {
-  id: number;
-  date: string;
-  price: number;
-  seller: string;
-  thumbnailHd: string;
-  title: string;
-  zipcode: string;
-  quantity: number;
-};
+import { ItemProp } from "@/types/item";
 
 type CardProp = {
   number: string;
