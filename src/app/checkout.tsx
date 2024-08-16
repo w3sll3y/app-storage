@@ -58,27 +58,31 @@ export default function Checkout() {
   }
 
   async function handleSubmitPayment() {
-    const items: ItemSell[] = []
-    const total = totalPrice;;
+    const items: ItemSell[] = [];
+    const total = totalPrice;
     const card: CardProp = {
       name,
       code,
       dueDate,
-      number
-    }
-    data.map(item => {
-      const newItem = {
-        title: item.title,
-        price: item.price,
-        seller: item.seller,
-        thumbnailHd: item.thumbnailHd
+      number,
+    };
+
+    data.forEach((item) => {
+      for (let i = 0; i < item.quantity; i++) {
+        const newItem = {
+          title: item.title,
+          price: item.price,
+          seller: item.seller,
+          thumbnailHd: item.thumbnailHd,
+        };
+        items.push(newItem);
       }
-      items.push(newItem);
-    })
+    });
+
     const purchase = await UserServer.handlePurchase({ items, ...card, total });
     if (purchase.id) {
       cartStorage.clear();
-      router.navigate('/');
+      router.navigate(`/order/${purchase.id}`);
       return purchase;
     }
     return purchase;

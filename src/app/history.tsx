@@ -3,7 +3,7 @@ import { PurchaseServer } from '@/server/purchases-server';
 import * as Styled from '@/styles/history';
 import { formatPrice } from '@/utils/formatPrice';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useFocusEffect } from 'expo-router';
+import { Link, router, useFocusEffect } from 'expo-router';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 
@@ -25,6 +25,10 @@ export default function History() {
     }
   }
 
+  async function handleGoOrder(id: number) {
+    router.navigate(`/myorders/${id}`);
+  }
+
   useFocusEffect(
     () => {
       getPurchases();
@@ -43,7 +47,9 @@ export default function History() {
             data={data}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <Styled.ItemContainer>
+              <Styled.ItemContainer
+                onPress={() => handleGoOrder(item.id)}
+              >
                 <Styled.Title>Pedido #{item.id}</Styled.Title>
                 <Styled.Text>Valor: {formatPrice(item.total)}</Styled.Text>
                 <Styled.Text>Status: Pedido confirmado</Styled.Text>

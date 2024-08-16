@@ -17,4 +17,20 @@ async function handleGetPurchasesData() {
   }
 }
 
-export const PurchaseServer = { handleGetPurchasesData } 
+async function handleGetPurchaseById(id: number) {
+  try {
+    const token = await userStorage.get();
+    const { data } = await api.get(`/purchases/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    return data;
+
+  } catch (error) {
+    throw error
+  }
+}
+
+export const PurchaseServer = { handleGetPurchasesData, handleGetPurchaseById } 
