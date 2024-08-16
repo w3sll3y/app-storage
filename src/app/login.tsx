@@ -1,11 +1,11 @@
 import Button from '@/components/Button';
 import Header from '@/components/Header';
 import Input from '@/components/Input';
-import * as Styled from '../styles/login';
-import { router } from 'expo-router';
-import { useState } from 'react';
 import { UserServer } from '@/server/user-server';
 import { userStorage } from '@/storage/user';
+import { router } from 'expo-router';
+import { useState } from 'react';
+import * as Styled from '../styles/login';
 
 export default function LoginPage() {
 
@@ -21,6 +21,8 @@ export default function LoginPage() {
     if (access_token) {
       await userStorage.save(String(access_token));
       router.navigate('/');
+      setEmail('');
+      setPassword('');
     }
   }
 

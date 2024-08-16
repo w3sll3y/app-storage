@@ -5,6 +5,7 @@ import Button from '@/components/Button';
 import { router } from 'expo-router';
 import { UserServer } from '@/server/user-server';
 import { useState } from 'react';
+import { ToastMessage } from '@/utils/toastMessages';
 
 export default function SignUp() {
 
@@ -19,6 +20,13 @@ export default function SignUp() {
   async function handleDoSignUp() {
     const data = await UserServer.handleSingUp({ name, email, password });
     if (data.id) {
+      ToastMessage.successToast(
+        'Bem-Vindo!',
+        'Cadastro feito com sucesso!'
+      )
+      setName('');
+      setEmail('');
+      setPassword('');
       router.navigate('/login');
     }
   }

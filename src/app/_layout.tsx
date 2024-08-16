@@ -6,6 +6,7 @@ import { Tabs, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { StatusBar, Text, View } from 'react-native';
 import { ItemProp } from '@/types/item';
+import Toast from 'react-native-toast-message';
 
 export default function TabLayout() {
   const [items, setItems] = useState<ItemProp[]>([]);
@@ -140,6 +141,7 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
+      <Toast />
     </View>
   );
 }
