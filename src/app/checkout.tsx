@@ -52,8 +52,20 @@ export default function Checkout() {
     setNumber(number)
   }
 
-  async function handleDueDate(dueDate: string) {
-    setDueDate(dueDate)
+  function formatDueDate(date: string): string {
+    // Remove todos os caracteres não numéricos
+    const cleaned = date.replace(/\D/g, '');
+    // Aplica a máscara
+    const match = cleaned.match(/^(\d{2})(\d{0,2})$/);
+    if (match) {
+      return `${match[1]}/${match[2]}`;
+    }
+    return cleaned;
+  }
+
+  function handleDueDateChange(newDate: string) {
+    const formattedDate = formatDueDate(newDate);
+    setDueDate(formattedDate);
   }
 
   async function handleCode(code: string) {
@@ -90,7 +102,6 @@ export default function Checkout() {
     }
 
     const purchase = await UserServer.handlePurchase({ items, ...card, total, zipcode });
-    console.log('data', total)
 
     if (purchase.id) {
       cartStorage.clear();
@@ -148,7 +159,7 @@ export default function Checkout() {
             code={code}
             handleName={handleName}
             handleNumber={handleNumber}
-            handleDueDate={handleDueDate}
+            handleDueDate={handleDueDateChange}
             handleCode={handleCode}
           />
           <Styled.CardSection>

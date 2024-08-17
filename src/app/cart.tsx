@@ -10,13 +10,15 @@ import Button from "@/components/Button";
 import { userStorage } from "@/storage/user";
 import { ItemProp } from "@/types/item";
 import { addressStorage } from "@/storage/address";
+import { ToastMessage } from "@/utils/toastMessages";
 
 export default function Cart() {
   const [user, setUser] = useState(false);
   const [cep, setCep] = useState('');
-  const [token, setToken] = useState<string | null>();
+  const [token, setToken] = useState<string | null>(null);
   const [data, setData] = useState<ItemProp[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cepError, setCepError] = useState<string | null>(null);
 
   async function getItems() {
     const items = await cartStorage.get();
@@ -32,8 +34,7 @@ export default function Cart() {
     if (quantity < 1) {
       await cartStorage.remove(id);
       return getItems();
-    }
-    else if (quantity >= 1) {
+    } else if (quantity >= 1) {
       await cartStorage.update(id, quantity);
       return getItems();
     }
@@ -41,7 +42,33 @@ export default function Cart() {
   }
 
   async function handleCep(cep: string) {
-    await addressStorage.saveCep(cep)
+    await addressStorage.saveCep(cep);
+  }
+
+  function formatCep(cep: string): string {
+    const cleaned = cep.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{5})(\d{0,3})$/);
+    if (match) {
+      return `${match[1]}-${match[2]}`;
+    }
+    return cleaned;
+  }
+
+  function handleCepChange(newCep: string) {
+    const formattedCep = formatCep(newCep);
+    setCep(formattedCep);
+    if (formattedCep.length === 9 && validateCep(formattedCep)) {
+      setCepError(null);
+    } else if (formattedCep.length > 9) {
+      setCepError('Formato de CEP inválido. Use o formato 00000-000.');
+    } else {
+      setCepError(null);
+    }
+  }
+
+  function validateCep(cep: string): boolean {
+    const cepRegex = /^\d{5}-\d{3}$/;
+    return cepRegex.test(cep);
   }
 
   async function calTotalPrice() {
@@ -56,17 +83,23 @@ export default function Cart() {
   async function getToken() {
     const token = await userStorage.get();
     setToken(token);
-    if (!!token) {
-      setUser(true)
+    if (token) {
+      setUser(true);
     }
   }
 
   async function handleNextStep() {
+    if (cepError) {
+      return ToastMessage.errorToast('Algo deu errado.😔', cepError);
+    }
+    if (cep.length < 9) {
+      return ToastMessage.errorToast('Algo deu errado.😔', 'Preencha o CEP no formato válido');
+    }
     if (token !== null) {
-      handleCep(cep)
-      return router.navigate('/checkout')
-    } else if (token === null) {
-      return router.navigate('/login')
+      await handleCep(cep);
+      return router.navigate('/checkout');
+    } else {
+      return router.navigate('/login');
     }
   }
 
@@ -82,6 +115,7 @@ export default function Cart() {
       calTotalPrice();
     }, [data])
   );
+
   return (
     <>
       <Styled.Container>
@@ -120,7 +154,6 @@ export default function Cart() {
                       </Styled.Quantity>
                     </Styled.TextContainer>
                   </Styled.ItemContainer>
-
                 )}
               />
             </Styled.ContainerList>
@@ -131,7 +164,7 @@ export default function Cart() {
                 placeholder="XXXXX-XXX"
                 maxLength={9}
                 value={cep}
-                onChangeText={newCep => setCep(newCep)}
+                onChangeText={handleCepChange}
               />
             </Styled.CepContainer>
             <Styled.TotalContainer>
@@ -155,16 +188,14 @@ export default function Cart() {
               onPress={handleNextStep}
             />
           </>
-        )
-        }
+        )}
         {data.length === 0 && (
           <Styled.ContainerEmpty>
             <Styled.Text>
               Seu carrinho está vazio
             </Styled.Text>
           </Styled.ContainerEmpty>
-        )
-        }
+        )}
       </Styled.Container>
     </>
   );
