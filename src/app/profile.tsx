@@ -22,6 +22,10 @@ export default function Profile() {
     router.navigate('/history')
   }
 
+  async function handleGoProfile() {
+    router.navigate('/user')
+  }
+
   async function handleLogout() {
     await userStorage.remove();
     setUser(false)
@@ -46,7 +50,9 @@ export default function Profile() {
             />
             <Styled.ContainerBody>
               <Styled.ContainerButtons>
-                <Styled.Button>
+                <Styled.Button
+                  onPress={handleGoProfile}
+                >
                   <Styled.Title>
                     Editar Perfil
                   </Styled.Title>

@@ -101,43 +101,43 @@ export default function TabLayout() {
         <Tabs.Screen
           name="login"
           options={{
-            href: null,
-            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+            href: null
           }}
         />
         <Tabs.Screen
           name="signup"
           options={{
-            href: null,
-            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+            href: null
           }}
         />
         <Tabs.Screen
           name="checkout"
           options={{
-            href: null,
-            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+            href: null
           }}
         />
         <Tabs.Screen
           name="history"
           options={{
-            href: null,
-            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+            href: null
           }}
         />
         <Tabs.Screen
           name="order/[id]"
           options={{
-            href: null,
-            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+            href: null
           }}
         />
         <Tabs.Screen
           name="myorders/[id]"
           options={{
-            href: null,
-            tabBarIcon: ({ color }) => <FontAwesome6 size={28} name="user-large" color={color} />,
+            href: null
+          }}
+        />
+        <Tabs.Screen
+          name="user"
+          options={{
+            href: null
           }}
         />
       </Tabs>

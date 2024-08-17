@@ -78,9 +78,14 @@ async function handleSingUp({ name, email, password }: SignUpProps) {
 }
 
 async function handleGetUserData() {
+  const token = await userStorage.get();
   try {
-    const { data } = await api.get<{ user: User }>(`/me`);
-    return data.user;
+    const { data } = await api.get(`/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
 
   } catch (error) {
     throw error
