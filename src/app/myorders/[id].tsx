@@ -13,6 +13,7 @@ type ItemProps = {
   total: number;
   userId?: number;
   items: ItemProp[];
+  zipcode: string;
 };
 
 type GroupedItem = ItemProp & { quantity: number };
@@ -83,7 +84,7 @@ const Order = () => {
                   <Styled.Title>{item.title}</Styled.Title>
                   <Styled.Price>{formatPrice(item.price)}</Styled.Price>
                   <Styled.Text>Vendedor: {item.seller}</Styled.Text>
-                  <Styled.Text>Cep: {item.zipcode}</Styled.Text>
+                  <Styled.Text>Cep: {data?.zipcode}</Styled.Text>
                   <Styled.Text>Quantidade: {item.quantity}</Styled.Text>
                 </Styled.TextContainer>
               </Styled.ItemContainer>

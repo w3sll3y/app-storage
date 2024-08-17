@@ -9,9 +9,11 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Button from "@/components/Button";
 import { userStorage } from "@/storage/user";
 import { ItemProp } from "@/types/item";
+import { addressStorage } from "@/storage/address";
 
 export default function Cart() {
   const [user, setUser] = useState(false);
+  const [cep, setCep] = useState('');
   const [token, setToken] = useState<string | null>();
   const [data, setData] = useState<ItemProp[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -38,6 +40,10 @@ export default function Cart() {
     return getItems();
   }
 
+  async function handleCep(cep: string) {
+    await addressStorage.saveCep(cep)
+  }
+
   async function calTotalPrice() {
     const total = data.reduce((accumulator, item) => {
       const itemTotal = item.price * (item.quantity || 1);
@@ -57,6 +63,7 @@ export default function Cart() {
 
   async function handleNextStep() {
     if (token !== null) {
+      handleCep(cep)
       return router.navigate('/checkout')
     } else if (token === null) {
       return router.navigate('/login')
@@ -122,6 +129,9 @@ export default function Cart() {
               <Styled.InputCep
                 keyboardType="numeric"
                 placeholder="XXXXX-XXX"
+                maxLength={9}
+                value={cep}
+                onChangeText={newCep => setCep(newCep)}
               />
             </Styled.CepContainer>
             <Styled.TotalContainer>

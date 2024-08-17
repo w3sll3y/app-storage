@@ -13,6 +13,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { ItemProp } from "@/types/item";
 import { ToastMessage } from '@/utils/toastMessages';
+import { addressStorage } from '@/storage/address';
 
 type CardProp = {
   number: string;
@@ -36,6 +37,7 @@ export default function Checkout() {
   const [name, setName] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [code, setCode] = useState('');
+  const [zipcode, setZipcode] = useState('');
 
   async function getItems() {
     const items = await cartStorage.get();
@@ -87,7 +89,9 @@ export default function Checkout() {
       )
     }
 
-    const purchase = await UserServer.handlePurchase({ items, ...card, total });
+    const purchase = await UserServer.handlePurchase({ items, ...card, total, zipcode });
+    console.log('data', total)
+
     if (purchase.id) {
       cartStorage.clear();
       router.navigate(`/order/${purchase.id}`);
@@ -100,9 +104,20 @@ export default function Checkout() {
     return purchase;
   }
 
+  async function getCep() {
+    const cep = await addressStorage.getCep();
+    setZipcode(cep ? cep : '');
+  }
+
   useFocusEffect(
     useCallback(() => {
       getItems();
+    }, [])
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      getCep();
     }, [])
   );
 

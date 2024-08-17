@@ -85,7 +85,8 @@ export const ItemColContainer = styled.TouchableOpacity`
 `;
 
 export const StyledColImage = styled.Image`
-  width: 300px;
+  width: 320px;
+  max-width: 320px;
   height: 130px;
   border-radius: 10px;
   object-fit: cover;

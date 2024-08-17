@@ -29,6 +29,7 @@ type PurchaseProps = {
   name: string;
   dueDate: string;
   code: string;
+  zipcode: string;
   total: number;
 };
 
@@ -86,7 +87,7 @@ async function handleGetUserData() {
   }
 }
 
-async function handlePurchase({ items, code, dueDate, name, number, total }: PurchaseProps) {
+async function handlePurchase({ items, code, dueDate, name, number, total, zipcode }: PurchaseProps) {
   const token = await userStorage.get();
   try {
     const { data } = await api.post(
@@ -97,7 +98,8 @@ async function handlePurchase({ items, code, dueDate, name, number, total }: Pur
         dueDate,
         name,
         number,
-        total
+        total,
+        zipcode
       },
       {
         headers: {
