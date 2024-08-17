@@ -140,6 +140,12 @@ export default function TabLayout() {
             href: null
           }}
         />
+        <Tabs.Screen
+          name="wallet"
+          options={{
+            href: null
+          }}
+        />
       </Tabs>
       <Toast />
     </View>

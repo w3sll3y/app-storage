@@ -26,6 +26,10 @@ export default function Profile() {
     router.navigate('/user')
   }
 
+  async function handleGoWallet() {
+    router.navigate('/wallet')
+  }
+
   async function handleLogout() {
     await userStorage.remove();
     setUser(false)
@@ -64,7 +68,9 @@ export default function Profile() {
                     Histórico de compras
                   </Styled.Title>
                 </Styled.Button>
-                <Styled.Button>
+                <Styled.Button
+                  onPress={handleGoWallet}
+                >
                   <Styled.Title>
                     Carteira
                   </Styled.Title>

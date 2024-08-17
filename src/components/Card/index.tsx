@@ -7,9 +7,9 @@ type CardProps = {
   dueDate: string;
   code: string;
   handleNumber: (value: string) => void;
-  handleName: (value: string) => void;
-  handleDueDate: (value: string) => void;
-  handleCode: (value: string) => void;
+  handleName?: (value: string) => void;
+  handleDueDate?: (value: string) => void;
+  handleCode?: (value: string) => void;
 };
 
 const Card: React.FC<CardProps> = ({
