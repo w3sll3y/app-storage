@@ -16,7 +16,6 @@ export default function User() {
 
   async function getUser() {
     const data = await UserServer.handleGetUserData();
-    console.log('heee', data);
     setUser(data);
   }
 

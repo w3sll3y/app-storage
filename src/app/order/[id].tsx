@@ -27,7 +27,6 @@ const Order = () => {
     try {
       const purchases = await PurchaseServer.handleGetPurchaseById(Number(id));
       setData(purchases);
-      console.log('Fetched data:', purchases);
     } catch (error) {
       console.error('Error fetching purchases:', error);
     }

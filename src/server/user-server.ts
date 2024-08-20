@@ -66,6 +66,7 @@ async function handleSingUp({ name, email, password }: SignUpProps) {
       'Bem-Vindo!🎉',
       'Cadastro feito com sucesso!'
     )
+
     return data;
   } catch (error: any) {
     if (error?.response?.status) {

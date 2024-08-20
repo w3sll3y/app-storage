@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: "http://192.168.0.101:3000",
+  baseURL: "https://api-storage-ttr7.onrender.com",
 })
