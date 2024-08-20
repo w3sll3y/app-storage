@@ -5,6 +5,7 @@ import LoginPage from "./login";
 import Header from "@/components/Header";
 import * as Styled from '@/styles/profile';
 import { router, useFocusEffect } from "expo-router";
+import { ToastMessage } from '@/utils/toastMessages';
 
 export default function Profile() {
   const [token, setToken] = useState<string | null>();
@@ -28,6 +29,10 @@ export default function Profile() {
 
   async function handleGoWallet() {
     router.navigate('/wallet')
+  }
+
+  async function handleGoAddress() {
+    ToastMessage.errorToast('Ops! 😔', 'Esta função ainda está em desenvolvimento')
   }
 
   async function handleLogout() {
@@ -75,7 +80,9 @@ export default function Profile() {
                     Carteira
                   </Styled.Title>
                 </Styled.Button>
-                <Styled.Button>
+                <Styled.Button
+                  onPress={handleGoAddress}
+                >
                   <Styled.Title>
                     Endereços
                   </Styled.Title>

@@ -53,9 +53,7 @@ export default function Checkout() {
   }
 
   function formatDueDate(date: string): string {
-    // Remove todos os caracteres não numéricos
     const cleaned = date.replace(/\D/g, '');
-    // Aplica a máscara
     const match = cleaned.match(/^(\d{2})(\d{0,2})$/);
     if (match) {
       return `${match[1]}/${match[2]}`;
@@ -70,6 +68,14 @@ export default function Checkout() {
 
   async function handleCode(code: string) {
     setCode(code)
+  }
+
+  async function handleNewCard() {
+    ToastMessage.successToast('Pode finalizar. 😎', 'Carão será adicionado ao finalizar compra')
+  }
+
+  async function handleUpdateCard() {
+    ToastMessage.errorToast('Ops! 😔', 'Esta função ainda está em desenvolvimento')
   }
 
   async function handleSubmitPayment() {
@@ -163,11 +169,11 @@ export default function Checkout() {
             handleCode={handleCode}
           />
           <Styled.CardSection>
-            <Styled.OptionCardSection>
+            <Styled.OptionCardSection onPress={handleNewCard}>
               <FontAwesome name="plus-square" size={16} color="black" />
               <Styled.Label>Cadastrar Cartão</Styled.Label>
             </Styled.OptionCardSection>
-            <Styled.OptionCardSection>
+            <Styled.OptionCardSection onPress={handleUpdateCard}>
               <FontAwesome6 name="wallet" size={16} color="black" />
               <Styled.Label>Trocar Cartão</Styled.Label>
             </Styled.OptionCardSection>

@@ -13,7 +13,7 @@ export const CardSection = styled.View`
   justify-content: space-between;
 `;
 
-export const OptionCardSection = styled.View`
+export const OptionCardSection = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 `;
@@ -62,3 +62,25 @@ export const Hr = styled.View`
   width: 100%; 
   border-radius: 5px; 
 `;
+
+export const ItemContainer = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
+export const TextContainer = styled.Text`
+  flex: 1;
+  align-items: center;
+`;
+
+export const Title = styled.Text`
+  flex: 1;
+  align-items: center;
+`;
+
+
+export const Text = styled.Text`
+  flex: 1;
+  align-items: center;
+`;
+
